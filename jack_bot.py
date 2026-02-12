@@ -9,15 +9,21 @@ from game_world.racetrack import RaceTrack
 Point = tuple[int, int]
 
 
-def bot_action(location: Point, track: RaceTrack) -> Point:
-    path = plan(location, track)
+class Bot_Action:
 
-    if path is None:
-        print("bad")
-        return (0, 0)
+    def __init__(self) -> None:
+        self.path = None
 
-    next_move = path.pop(0)
-    return (next_move[0] - location[0], next_move[1] - location[1])
+    def __call__(self, location: Point, track: RaceTrack) -> Point:
+        if self.path is None:
+            self.path = plan(location, track)
+
+        if self.path is None:
+            print("bad")
+            return (0, 0)
+
+        next_move = self.path.pop(0)
+        return (next_move[0] - location[0], next_move[1] - location[1])
 
 
 def distance(point_a: Point, point_b: Point):
