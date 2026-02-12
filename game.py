@@ -12,10 +12,10 @@ from random_bot import random_move
 from jack_bot import Bot_Action
 import traceback
 
-TRACK = load_track("./tracks/complicated_test.pkl")
+TRACK = load_track("./tracks/more_complicated_test.pkl")
 PLAYER = Bot_Action()
-REPLAY_SPEED = .01  # seconds per move in the replay. (lower is faster)
-SHOW_REPLAY = True
+REPLAY_SPEED = .1  # seconds per move in the replay. (lower is faster)
+SHOW_REPLAY = False
 CLOCK = 10
 DELAY = 5
 MAX_TURNS_WITHOUT_PROGRESS = None  # None means no limit
@@ -77,7 +77,7 @@ class Game:
         if self.time < 0:
             return Status.DNF, "Timed Out"
         self.time += min(time_taken, self.delay)
-        options = {(1, 0), (-1, 0), (0, 1), (0, -1), (0, 0)}
+        options = {(1, 0), (-1, 0), (0, 1), (0, -1)}
         if action not in options:
             return Status.DNF, f"Racer made illegal move {action}!"
         if self.track.buttons[self.pos]:
@@ -175,6 +175,7 @@ def watch_replay(track: RaceTrack, history: list[Point], time_per_move: float):
 def main():
     game = Game(PLAYER, TRACK, CLOCK, DELAY, MAX_TURNS_WITHOUT_PROGRESS)
     _, msg = game.play_game()
+    print(msg)
     if SHOW_REPLAY:
         watch_replay(TRACK, game.history, REPLAY_SPEED)
     print(msg)

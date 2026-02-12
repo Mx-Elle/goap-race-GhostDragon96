@@ -2,6 +2,7 @@ from collections import defaultdict
 from copy import deepcopy
 from functools import cache
 import heapq
+import time
 
 import numpy as np
 from game_world.racetrack import RaceTrack
