@@ -12,12 +12,12 @@ from random_bot import random_move
 from jack_bot import Bot_Action
 import traceback
 
-TRACK = load_track("./tracks/long_4346.pkl")
+TRACK = load_track("./tracks/Even_More_Massive.pkl")
 PLAYER = Bot_Action()
 REPLAY_SPEED = .01  # seconds per move in the replay. (lower is faster)
 SHOW_REPLAY = True
-CLOCK = 10
-DELAY = 5
+CLOCK = 60
+DELAY = 25
 MAX_TURNS_WITHOUT_PROGRESS = None  # None means no limit
 
 
@@ -114,7 +114,7 @@ class Game:
         status, msg = Status.ONGOING, "Just Started."
         while status == Status.ONGOING:
             status, msg = self.tick()
-        print(self.player_time)
+        print(round(self.player_time, 3))
         return status, msg
 
 
