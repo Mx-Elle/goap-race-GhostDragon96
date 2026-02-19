@@ -12,12 +12,12 @@ from random_bot import random_move
 from jack_bot import Bot_Action
 import traceback
 
-TRACK = load_track("./tracks/Even_More_Massive.pkl")
+TRACK = load_track("./tracks/extreme.pkl")
 PLAYER = Bot_Action()
-REPLAY_SPEED = .01  # seconds per move in the replay. (lower is faster)
+REPLAY_SPEED = .1  # seconds per move in the replay. (lower is faster)
 SHOW_REPLAY = True
-CLOCK = 60
-DELAY = 25
+CLOCK = 10
+DELAY = 5
 MAX_TURNS_WITHOUT_PROGRESS = None  # None means no limit
 
 

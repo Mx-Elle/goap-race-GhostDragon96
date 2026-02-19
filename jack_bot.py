@@ -2,9 +2,7 @@ from collections import defaultdict
 from copy import deepcopy
 from functools import cache
 import heapq
-import time
 
-import numpy as np
 from game_world.racetrack import RaceTrack
 
 Point = tuple[int, int]
@@ -20,8 +18,7 @@ class Bot_Action:
             self.path = plan(location, track)
 
         if self.path is None:
-            print("bad")
-            return (0, 0)
+            raise Exception("No possible path")
 
         next_move = self.path.pop(0)
         return (next_move[0] - location[0], next_move[1] - location[1])
@@ -118,7 +115,6 @@ def plan(start_point: Point, track: RaceTrack):
     if (
         not found_path
     ):  # if the while ends and we never found a path then there are no paths
-        print("path not found")
         return None
 
     last: tuple[Point, bytes] | None = (curr, curr_track.active.tobytes())

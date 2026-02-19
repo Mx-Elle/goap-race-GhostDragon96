@@ -1,6 +1,8 @@
+# use to make a track really long with pattern. 
+
 from game_world.racetrack import load_track
 
-location = "tracks/Even_More_Massive.pkl"
+location = "tracks/50x50.pkl"
 
 track = load_track(location)
 track.walls[1::2] = 1
