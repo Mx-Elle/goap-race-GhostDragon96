@@ -2,7 +2,7 @@
 
 from game_world.racetrack import load_track
 
-location = "tracks/50x50.pkl"
+location = "tracks/step11101.pkl"
 
 track = load_track(location)
 track.walls[1::2] = 1
@@ -22,5 +22,5 @@ track.button_colors[::2, 9::10] = 6
 track.button_colors[::2, -1] = 7
 track.wall_colors[1::2, 0] = 7
 track.active[::2, 2::2] = 0
-track.active[1::4, 0] = 0
+track.active[3::4, 0] = 0
 track.save(location)

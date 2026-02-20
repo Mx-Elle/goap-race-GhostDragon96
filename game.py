@@ -12,9 +12,9 @@ from random_bot import random_move
 from jack_bot import Bot_Action
 import traceback
 
-TRACK = load_track("./tracks/extreme.pkl")
+TRACK = load_track("./tracks/step11101.pkl")
 PLAYER = Bot_Action()
-REPLAY_SPEED = .1  # seconds per move in the replay. (lower is faster)
+REPLAY_SPEED = .01  # seconds per move in the replay. (lower is faster)
 SHOW_REPLAY = True
 CLOCK = 10
 DELAY = 5
@@ -58,7 +58,6 @@ class Game:
         self.pos = track.spawn
         self.min_dist = float("inf")
         self.history = []
-        self.player_time = 0
 
     def tick(self) -> tuple[Status, str]:
         track_copy = deepcopy(self.track)
@@ -73,7 +72,6 @@ class Game:
                 f"Racer crashed with the following error message:\n{traceback.format_exc()}",
             )
         time_taken = monotonic() - start_time
-        self.player_time += time_taken
         self.time -= time_taken
         self.history.append(action)
         if self.time < 0:
@@ -114,7 +112,6 @@ class Game:
         status, msg = Status.ONGOING, "Just Started."
         while status == Status.ONGOING:
             status, msg = self.tick()
-        print(round(self.player_time, 3))
         return status, msg
 
 
@@ -178,7 +175,6 @@ def watch_replay(track: RaceTrack, history: list[Point], time_per_move: float):
 def main():
     game = Game(PLAYER, TRACK, CLOCK, DELAY, MAX_TURNS_WITHOUT_PROGRESS)
     _, msg = game.play_game()
-    print(msg)
     if SHOW_REPLAY:
         watch_replay(TRACK, game.history, REPLAY_SPEED)
     print(msg)
